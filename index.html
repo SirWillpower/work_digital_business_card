@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="William Carle, PMP, MBA — Project Manager at DND. Let's keep in touch.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="William Carle, PMP, MBA">
+    <meta property="og:description" content="Project Manager at DND — Let's keep in touch.">
+    <meta property="og:image" content="https://wcarle.com/static/will_portrait_business.png">
+    <meta property="og:url" content="https://wcarle.com">
+    <meta property="og:type" content="profile">
+
     <title>William Carle, PMP, MBA</title>
     <link rel="stylesheet" href="static/styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/rfl3gjd.css">
@@ -15,8 +25,11 @@
             <h1>I'm Will</h1>
             <h2>Let's keep in touch!</h2>
             <p class="description">Project Manager at DND</p>
-            <a href="static/carle.vcf" id="vcf-btn" class="button" type="text/x-vcard; chartset=utf-8">Download Contact</a>
+            <button id="vcf-btn" class="button" onclick="handleContact()">Download Contact</button>
             <div class="social-buttons">
+                <a href="tel:+16139452734" class="social-btn phone">
+                    <img src="static/icons/phone.svg" alt="Phone">
+                </a>
                 <a href="https://www.linkedin.com/in/carle-william/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin">
                     <img src="static/icons/linkedin.png" alt="LinkedIn">
                 </a>
@@ -26,5 +39,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function handleContact() {
+            const ua = navigator.userAgent;
+            const isAndroid = /android/i.test(ua);
+
+            if (isAndroid) {
+                // Open VCF directly in Android Contacts app via intent (Chrome only)
+                window.location.href = "intent://wcarle.com/static/carle.vcf#Intent;scheme=https;type=text/x-vcard;action=android.intent.action.VIEW;end";
+            } else {
+                // iOS and desktop: trigger native download
+                const a = document.createElement('a');
+                a.href = 'static/carle.vcf';
+                a.download = 'carle.vcf';
+                a.click();
+            }
+        }
+    </script>
 </body>
 </html>
